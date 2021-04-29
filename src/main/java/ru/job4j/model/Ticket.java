@@ -7,14 +7,12 @@ public class Ticket {
     private int sessionId;
     private int row;
     private int cell;
-    private int accountId;
 
-    public Ticket(int id, int sessionId, int row, int cell, int accountId) {
+    public Ticket(int id, int sessionId, int row, int cell) {
         this.id = id;
         this.sessionId = sessionId;
         this.row = row;
         this.cell = cell;
-        this.accountId = accountId;
     }
 
     @Override
@@ -22,12 +20,12 @@ public class Ticket {
         if (this == o) return true;
         if (!(o instanceof Ticket)) return false;
         Ticket ticket = (Ticket) o;
-        return getId() == ticket.getId() && getSessionId() == ticket.getSessionId() && getRow() == ticket.getRow() && getCell() == ticket.getCell() && getAccountId() == ticket.getAccountId();
+        return getId() == ticket.getId() && getSessionId() == ticket.getSessionId() && getRow() == ticket.getRow() && getCell() == ticket.getCell();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getSessionId(), getRow(), getCell(), getAccountId());
+        return Objects.hash(getId(), getSessionId(), getRow(), getCell());
     }
 
     public void setId(int id) {
@@ -46,10 +44,6 @@ public class Ticket {
         this.cell = cell;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-
     public int getId() {
         return id;
     }
@@ -66,7 +60,4 @@ public class Ticket {
         return cell;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
 }

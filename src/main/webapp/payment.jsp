@@ -1,3 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
 
@@ -40,21 +44,27 @@
 <div class="container pt-3">
     <div class="card mb-3 ">
         <div class="card-header fw-light">
-            Вы выбрали ряд 1 место 1, Сумма : 499 рублей.
+            <%
+                Object row = session.getAttribute("row");
+                Object cell = session.getAttribute("cell");
+            %>
+            Вы выбрали ряд <%=row%> место <%=cell%>, Сумма : 499 рублей.
         </div>
         <div class="card-body fw-light">
             <form action="/cinema/enroll" method="post">
                 <div class="input-group mb-3 fw-light">
                     <span class="input-group-text fw-light border-success" id="basic-addon1">Enter</span>
-                    <input type="text" class="form-control fw-light border-success" placeholder="Name"
+                    <input type="text" name="name" class="form-control fw-light border-success" placeholder="Name"
                            aria-label="Username" aria-describedby="basic-addon1" id="name">
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label fw-light">Phone Number</label>
-                    <input type="text" class="form-control fw-light border-success" id="phone" placeholder="+7...">
+                    <input type="text" name="phone" class="form-control fw-light border-success" id="phone"
+                           placeholder="+7...">
                 </div>
                 <button type="submit" onclick="return validate()"
-                        class="btn btn-success fw-light btn-sm">Enroll</button>
+                        class="btn btn-success fw-light btn-sm">Enroll
+                </button>
             </form>
         </div>
     </div>

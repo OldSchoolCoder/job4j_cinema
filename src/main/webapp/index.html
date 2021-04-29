@@ -17,14 +17,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         function validate() {
-            $('table').find('input').each(function () {
-                if ($(this).val() == 11) {
-                    alert('Enter ' + $(this).attr('name'));
+            let isChecked = false;
+            $('form').find('input').each(function () {
+                if ($(this).prop('checked')) {
+                    isChecked = true;
                     return false;
                 }
             });
+            if (isChecked) {
+                $('form').submit();
+            } else {
+                alert('Book the place!');
+            }
             return false;
         }
+
+        function hide(selector) {
+            $.get('http://localhost:8080/cinema/hall', {
+                name: $(selector).attr("id")
+            }).done(function (response) {
+                $(selector).html(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+        }
+
+        function hideCell() {
+            $('table').find('td').each(function () {
+                hide(this);
+            });
+        }
+
+        $(function () {
+            hideCell();
+        });
+
+        setInterval(hideCell, 3000);
+
     </script>
     <title>Cinema</title>
 </head>
@@ -45,30 +74,30 @@
                     <th class="fw-light">3</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 <tr>
                     <th>1</th>
-                    <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
+                    <td id="11"><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
+                    <td id="12"><input type="radio" name="place" value="12"> Ряд 1, Место 1</td>
+                    <td id="13"><input type="radio" name="place" value="13"> Ряд 1, Место 1</td>
                 </tr>
                 <tr>
                     <th>2</th>
-                    <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
+                    <td id="21"><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
+                    <td id="22"><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
+                    <td id="23"><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
                 </tr>
                 <tr>
                     <th>3</th>
-                    <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
-                    <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
+                    <td id="31"><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
+                    <td id="32"><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
+                    <td id="33"><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="row float-right">
-            <button type="submit" class="btn btn-success fw-light">Оплатить</button>
+            <button type="submit" onclick="return validate()" class="btn btn-success fw-light">Оплатить</button>
         </div>
     </form>
 </div>

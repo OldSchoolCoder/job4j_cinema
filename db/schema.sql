@@ -12,5 +12,6 @@ CREATE TABLE ticket (
                         session_id INT NOT NULL,
                         row INT NOT NULL,
                         cell INT NOT NULL,
+                        unique (session_id, row, cell),
                         account_id INT NOT NULL REFERENCES account(id)
 );
